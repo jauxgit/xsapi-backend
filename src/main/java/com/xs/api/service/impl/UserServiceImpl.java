@@ -188,13 +188,22 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
         return this.update(userUpdateWrapper);
     }
 
+    /**
+     * 修改用户密码
+     * @param userAccount   用户账号
+     * @param newPassword   修改的密码
+     * @param userPassword  旧密码
+     * @param checkPassword 确认新密码
+     * @return
+     */
     @Override
     public boolean userResetPassword(String userAccount, String newPassword, String userPassword, String checkPassword) {
+        final int passwordNum = 8;
         // 1. 校验
         if (StringUtils.isAnyBlank(userAccount, newPassword, userPassword, checkPassword)) {
             throw new BusinessException(ErrorCode.PARAMS_ERROR, "参数为空");
         }
-        if (newPassword.length() < 8 || checkPassword.length() < 8) {
+        if (newPassword.length() < passwordNum || checkPassword.length() < passwordNum) {
             throw new BusinessException(ErrorCode.PARAMS_ERROR, "用户密码过短");
         }
         // 密码和校验密码相同

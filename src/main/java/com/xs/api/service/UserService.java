@@ -66,11 +66,11 @@ public interface UserService extends IService<User> {
 
     /**
      * 用户修改密码
-     * @param userAccount
-     * @param newPassword
-     * @param userPassword
-     * @param checkPassword
-     * @return
+     * @param userAccount   用户账号
+     * @param newPassword   修改的密码
+     * @param userPassword  旧密码
+     * @param checkPassword 确认新密码
+     * @return  true：修改成功   false：修改失败
      */
     boolean userResetPassword(String userAccount, String newPassword, String userPassword, String checkPassword);
 }
